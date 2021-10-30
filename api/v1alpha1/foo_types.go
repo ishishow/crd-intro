@@ -1,12 +1,9 @@
 /*
 Copyright 2021.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,17 +22,26 @@ import (
 
 // FooSpec defines the desired state of Foo
 type FooSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Format:=string
 
-	// Foo is an example field of Foo. Edit foo_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// the name of deployment which is owned by foo
+	DeploymentName string `json:"deploymentName"`
+
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Minimum=0
+
+	// the replicas of deployment which is owned by foo
+	Replicas *int32 `json:"replicas"`
 }
 
 // FooStatus defines the observed state of Foo
 type FooStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// +optional
+	AvailableReplicas int32 `json:"availableReplicas"`
 }
 
 //+kubebuilder:object:root=true
