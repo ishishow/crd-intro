@@ -8,4 +8,4 @@ webhook:
   port: 9443
 leaderElection:
   leaderElect: true
-  resourceName: d102358e.k8s.io
+  resourceName: d102358e.ishishow.com
